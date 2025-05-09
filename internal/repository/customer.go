@@ -1,9 +1,9 @@
 package repository
 
 import (
+	"PerpusGo/domain"
 	"context"
 	"database/sql"
-	"libraryRestAPI/domain"
 
 	"github.com/doug-martin/goqu"
 )

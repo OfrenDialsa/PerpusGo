@@ -1,9 +1,9 @@
 package connection
 
 import (
+	"PerpusGo/internal/config"
 	"database/sql"
 	"fmt"
-	"libraryRestAPI/internal/config"
 	"log"
 
 	_ "github.com/lib/pq"

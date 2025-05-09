@@ -1,9 +1,9 @@
 package main
 
 import (
-	"libraryRestAPI/internal/config"
-	"libraryRestAPI/internal/connection"
-	"libraryRestAPI/internal/repository"
+	"PerpusGo/internal/config"
+	"PerpusGo/internal/connection"
+	"PerpusGo/internal/repository"
 
 	"github.com/gofiber/fiber/v2"
 )

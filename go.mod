@@ -1,4 +1,4 @@
-module libraryRestAPI
+module PerpusGo
 
 go 1.24.3
 
