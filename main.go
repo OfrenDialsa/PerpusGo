@@ -12,6 +12,7 @@ func main() {
 	cnf := config.Get()
 	dbConnection := connection.GetDatabase(cnf.Database)
 	app := fiber.New()
+
 	customerRepository := repository.NewCustomer(dbConnection)
 	_ = app.Listen(cnf.Server.Host + ":" + cnf.Server.Port)
 }
