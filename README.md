@@ -53,7 +53,7 @@ git clone https://github.com/OfrenDialsa/perpusGo.git
 cd perpusGo
 ```
 
-2. **Create \`.env\` file**
+2. **Create `.env` file**
 
 ```env
 PORT=3000
@@ -77,7 +77,7 @@ go mod tidy
 go run main.go
 ```
 
-The server will start on \`http://localhost:3000\`.
+The server will start on `http://localhost:3000`.
 
 ## 🧪 API Endpoints
 
@@ -99,7 +99,7 @@ The server will start on \`http://localhost:3000\`.
 
 ## 🔐 Authentication
 
-All book-related endpoints require a valid JWT token in the \`Authorization\` header:
+All book-related endpoints require a valid JWT token in the `Authorization` header:
 
 ```
 Authorization: Bearer <token>
