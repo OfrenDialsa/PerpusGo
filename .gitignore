@@ -1,22 +1,53 @@
-# Binaries
+# Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
-
-# Test binaries
 *.test
-
-# Output of go build
 *.out
 
-# Vendor directories
+# Output of `go build`, `go test`, etc.
+*.log
+
+# Go workspace files
+*.mod
+*.sum
+
+# Dependency directories (if using vendoring)
 vendor/
 
-# IDE/editor settings
+# IDEs and editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Environment files
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and config
 .env
+.env.*
+config.yaml
+*.local.json
+
+# Coverage files
+coverage.out
+
+# Profiling files
+cpu.prof
+mem.prof
+block.prof
+trace.out
+
+# Build directories
+bin/
+build/
+dist/
+
+# Dependency tools (Go modules - optional)
+# Uncomment below if you don't commit go.mod/go.sum
+# go.mod
+# go.sum
