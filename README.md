@@ -18,22 +18,39 @@ Perpus Go is a backend project developed in **Golang** using the **Fiber** web f
 ## 🧱 Project Structure
 
 ```
-perpus-go/
+PerpusGo/
+├── .github/
+├── domain/
+│   ├── auth.go
+│   ├── customer.go
+│   └── user.go
+├── dto/
+│   ├── auth_data.go
+│   ├── customer_data.go
+│   └── response.go
+├── internal/
+│   ├── api/
+│   │   ├── auth.go
+│   │   └── customer.go
+│   ├── config/
+│   │   ├── loader.go
+│   │   └── model.go
+│   ├── connection/
+│   │   └── database.go
+│   ├── repository/
+│   │   ├── customer.go
+│   │   └── user.go
+│   ├── service/
+│   │   ├── auth.go
+│   │   └── customer.go
+│   └── util/
+│       └── validation.go
+├── .env
+├── .gitignore
+├── go.mod
+├── go.sum
 ├── main.go
-├── config/
-│   └── database.go
-├── controllers/
-│   ├── authController.go
-│   └── bookController.go
-├── models/
-│   ├── user.go
-│   └── book.go
-├── routes/
-│   └── routes.go
-├── middleware/
-│   └── jwtMiddleware.go
-└── utils/
-    └── helpers.go
+└── README.md
 ```
 
 ## 🛠️ Setup & Installation
