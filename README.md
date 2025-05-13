@@ -102,17 +102,17 @@ The server will start on `http://localhost:3000`.
 
 | Method | Endpoint       | Description        |
 |--------|----------------|--------------------|
-| POST   | `login\`       | User login         |
+| POST   | `auth`        | User login         |
 
 ### Books (Protected by JWT)
 
 | Method | Endpoint       | Description            |
 |--------|----------------|------------------------|
 | GET    | `/books`       | List all books         |
-| GET    | `/books/:id\`  | Get book by ID         |
-| POST   | `/books\`      | Add a new book         |
-| PUT    | `/books/:id\`  | Update book details    |
-| DELETE | `/books/:id\`  | Delete a book          |
+| GET    | `/books/:id`   | Get book by ID         |
+| POST   | `/books`       | Add a new book         |
+| PUT    | `/books/:id`   | Update book details    |
+| DELETE | `/books/:id`   | Delete a book          |
 
 ## 🔐 Authentication
 
