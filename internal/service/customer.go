@@ -4,6 +4,10 @@ import (
 	"PerpusGo/domain"
 	"PerpusGo/dto"
 	"context"
+	"database/sql"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 type customerService struct {
@@ -32,4 +36,15 @@ func (cs *customerService) Index(ctx context.Context) ([]dto.CustomerData, error
 		})
 	}
 	return customerData, nil
+}
+
+// Create implements domain.CustomerService.
+func (cs *customerService) Create(ctx context.Context, req dto.CreateCustomerRequest) error {
+	customer := domain.Customer{
+		ID:         uuid.NewString(),
+		Code:       req.Code,
+		Name:       req.Name,
+		Created_at: sql.NullTime{Time: time.Now(), Valid: true},
+	}
+	return cs.customerRepository.Save(ctx, &customer)
 }
