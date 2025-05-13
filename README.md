@@ -102,17 +102,17 @@ The server will start on `http://localhost:3000`.
 
 | Method | Endpoint       | Description        |
 |--------|----------------|--------------------|
-| POST   | `auth`        | User login         |
+| POST   | `/auth`        | User login         |
 
-### Books (Protected by JWT)
+### Customers (Protected by JWT)
 
-| Method | Endpoint       | Description            |
-|--------|----------------|------------------------|
-| GET    | `/books`       | List all books         |
-| GET    | `/books/:id`   | Get book by ID         |
-| POST   | `/books`       | Add a new book         |
-| PUT    | `/books/:id`   | Update book details    |
-| DELETE | `/books/:id`   | Delete a book          |
+| Method | Endpoint           | Description            |
+|--------|--------------------|------------------------|
+| GET    | `/customers`       | List all books         |
+| GET    | `/customers/:id`   | Get book by ID         |
+| POST   | `/customers`       | Add a new book         |
+| PUT    | `/customers/:id`   | Update book details    |
+| DELETE | `/customers/:id`   | Delete a book          |
 
 ## 🔐 Authentication
 
@@ -126,9 +126,8 @@ Authorization: Bearer <token>
 
 ```json
 {
-  "title": "Clean Code",
-  "author": "Robert C. Martin",
-  "published_year": 2008
+  "code": "M-0001",
+  "name": "10 Dosa Besar Soeharto"
 }
 ```
 
@@ -141,8 +140,3 @@ This project is open-source and available under the [MIT License](LICENSE).
 Contributions are welcome! Feel free to open issues or pull requests to improve this project.
 
 ---
-
-Made with ❤️ using Golang and Fiber
-EOF
-
-echo "README.md created successfully!"
