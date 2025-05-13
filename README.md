@@ -49,8 +49,8 @@ perpus-go/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/perpus-go.git
-cd perpus-go
+git clone https://github.com/OfrenDialsa/perpusGo.git
+cd perpusGo
 ```
 
 2. **Create \`.env\` file**
