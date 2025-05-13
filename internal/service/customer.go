@@ -66,3 +66,37 @@ func (cs *customerService) Update(ctx context.Context, req dto.UpdateCustomerReq
 	persisted.Updated_at = sql.NullTime{Time: time.Now(), Valid: true}
 	return cs.customerRepository.Update(ctx, &persisted)
 }
+
+// Delete implements domain.CustomerService.
+func (cs *customerService) Delete(ctx context.Context, id string) error {
+	exist, err := cs.customerRepository.FindByID(ctx, id)
+
+	if err != nil {
+		return err
+	}
+
+	if exist.ID == "" {
+		return errors.New("customer data not found")
+	}
+
+	return cs.customerRepository.Delete(ctx, id)
+}
+
+// Show implements domain.CustomerService.
+func (cs *customerService) Show(ctx context.Context, id string) (dto.CustomerData, error) {
+	persisted, err := cs.customerRepository.FindByID(ctx, id)
+
+	if err != nil {
+		return dto.CustomerData{}, err
+	}
+
+	if persisted.ID == "" {
+		return dto.CustomerData{}, errors.New("customer not found")
+	}
+
+	return dto.CustomerData{
+		ID:   persisted.ID,
+		Code: persisted.Code,
+		Name: persisted.Name,
+	}, nil
+}
