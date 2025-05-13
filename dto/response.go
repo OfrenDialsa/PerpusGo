@@ -30,5 +30,4 @@ func CreateResponseSuccess[T any](data T) Response[T] {
 		Message: "success",
 		Data:    data,
 	}
-
 }
