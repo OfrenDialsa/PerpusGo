@@ -18,22 +18,39 @@ Perpus Go is a backend project developed in **Golang** using the **Fiber** web f
 ## 🧱 Project Structure
 
 ```
-perpus-go/
+PerpusGo/
+├── .github/
+├── domain/
+│   ├── auth.go
+│   ├── customer.go
+│   └── user.go
+├── dto/
+│   ├── auth_data.go
+│   ├── customer_data.go
+│   └── response.go
+├── internal/
+│   ├── api/
+│   │   ├── auth.go
+│   │   └── customer.go
+│   ├── config/
+│   │   ├── loader.go
+│   │   └── model.go
+│   ├── connection/
+│   │   └── database.go
+│   ├── repository/
+│   │   ├── customer.go
+│   │   └── user.go
+│   ├── service/
+│   │   ├── auth.go
+│   │   └── customer.go
+│   └── util/
+│       └── validation.go
+├── .env
+├── .gitignore
+├── go.mod
+├── go.sum
 ├── main.go
-├── config/
-│   └── database.go
-├── controllers/
-│   ├── authController.go
-│   └── bookController.go
-├── models/
-│   ├── user.go
-│   └── book.go
-├── routes/
-│   └── routes.go
-├── middleware/
-│   └── jwtMiddleware.go
-└── utils/
-    └── helpers.go
+└── README.md
 ```
 
 ## 🛠️ Setup & Installation
@@ -85,17 +102,17 @@ The server will start on `http://localhost:3000`.
 
 | Method | Endpoint       | Description        |
 |--------|----------------|--------------------|
-| POST   | `login\`       | User login         |
+| POST   | `auth`        | User login         |
 
 ### Books (Protected by JWT)
 
 | Method | Endpoint       | Description            |
 |--------|----------------|------------------------|
 | GET    | `/books`       | List all books         |
-| GET    | `/books/:id\`  | Get book by ID         |
-| POST   | `/books\`      | Add a new book         |
-| PUT    | `/books/:id\`  | Update book details    |
-| DELETE | `/books/:id\`  | Delete a book          |
+| GET    | `/books/:id`   | Get book by ID         |
+| POST   | `/books`       | Add a new book         |
+| PUT    | `/books/:id`   | Update book details    |
+| DELETE | `/books/:id`   | Delete a book          |
 
 ## 🔐 Authentication
 
