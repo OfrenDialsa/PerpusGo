@@ -1,6 +1,3 @@
-#!/bin/bash
-
-cat << 'EOF' > README.md
 # 📚 Perpus Go
 
 Perpus Go is a backend project developed in **Golang** using the **Fiber** web framework and **PostgreSQL** as the database. It provides a simple RESTful API with features like **JWT-based authentication** and **book management**. This project is designed as a foundational backend for a library management system or similar use cases.
@@ -20,7 +17,7 @@ Perpus Go is a backend project developed in **Golang** using the **Fiber** web f
 
 ## 🧱 Project Structure
 
-\`\`\`
+```
 perpus-go/
 ├── main.go
 ├── config/
@@ -37,7 +34,7 @@ perpus-go/
 │   └── jwtMiddleware.go
 └── utils/
     └── helpers.go
-\`\`\`
+```
 
 ## 🛠️ Setup & Installation
 
@@ -51,14 +48,14 @@ perpus-go/
 
 1. **Clone the repository**
 
-\`\`\`bash
+```bash
 git clone https://github.com/yourusername/perpus-go.git
 cd perpus-go
-\`\`\`
+```
 
 2. **Create \`.env\` file**
 
-\`\`\`env
+```env
 PORT=3000
 DB_HOST=localhost
 DB_PORT=5432
@@ -66,19 +63,19 @@ DB_USER=your_db_user
 DB_PASSWORD=your_db_password
 DB_NAME=perpus_go
 JWT_SECRET=your_jwt_secret
-\`\`\`
+```
 
 3. **Install dependencies**
 
-\`\`\`bash
+```bash
 go mod tidy
-\`\`\`
+```
 
 4. **Run the application**
 
-\`\`\`bash
+```bash
 go run main.go
-\`\`\`
+```
 
 The server will start on \`http://localhost:3000\`.
 
@@ -88,35 +85,35 @@ The server will start on \`http://localhost:3000\`.
 
 | Method | Endpoint       | Description        |
 |--------|----------------|--------------------|
-| POST   | \`/login\`       | User login         |
+| POST   | `login\`       | User login         |
 
 ### Books (Protected by JWT)
 
 | Method | Endpoint       | Description            |
 |--------|----------------|------------------------|
-| GET    | \`/books\`       | List all books         |
-| GET    | \`/books/:id\`   | Get book by ID         |
-| POST   | \`/books\`       | Add a new book         |
-| PUT    | \`/books/:id\`   | Update book details    |
-| DELETE | \`/books/:id\`   | Delete a book          |
+| GET    | `/books`       | List all books         |
+| GET    | `/books/:id\`  | Get book by ID         |
+| POST   | `/books\`      | Add a new book         |
+| PUT    | `/books/:id\`  | Update book details    |
+| DELETE | `/books/:id\`  | Delete a book          |
 
 ## 🔐 Authentication
 
 All book-related endpoints require a valid JWT token in the \`Authorization\` header:
 
-\`\`\`
+```
 Authorization: Bearer <token>
-\`\`\`
+```
 
 ## 📘 Example Book Object
 
-\`\`\`json
+```json
 {
   "title": "Clean Code",
   "author": "Robert C. Martin",
   "published_year": 2008
 }
-\`\`\`
+```
 
 ## 📄 License
 
