@@ -108,11 +108,21 @@ The server will start on `http://localhost:3000`.
 
 | Method | Endpoint           | Description            |
 |--------|--------------------|------------------------|
-| GET    | `/customers`       | List all books         |
-| GET    | `/customers/:id`   | Get book by ID         |
-| POST   | `/customers`       | Add a new book         |
-| PUT    | `/customers/:id`   | Update book details    |
-| DELETE | `/customers/:id`   | Delete a book          |
+| GET    | `/customers`       | List all customers     |
+| GET    | `/customers/:id`   | Get customers by ID    |
+| POST   | `/customers`       | Add new customer       |
+| PUT    | `/customers/:id`   | Update customer data   |
+| DELETE | `/customers/:id`   | Delete customer        |
+
+### Books (Protected by JWT)
+
+| Method | Endpoint       | Description            |
+|--------|----------------|------------------------|
+| GET    | `/books`       | List all books         |
+| GET    | `/books/:id`   | Get book by ID         |
+| POST   | `/books`       | Add a new book         |
+| PUT    | `/books/:id`   | Update book details    |
+| DELETE | `/books/:id`   | Delete a book          |
 
 ## 🔐 Authentication
 
