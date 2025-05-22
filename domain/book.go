@@ -29,5 +29,5 @@ type BookService interface {
 	Create(ctx context.Context, req dto.CreateBookRequest) error
 	Update(ctx context.Context, req dto.UpdateBookRequest) error
 	Delete(ctx context.Context, id string) error
-	Show(ctx context.Context, id string) (dto.BookData, error)
+	Show(ctx context.Context, id string) (dto.BookShowData, error)
 }

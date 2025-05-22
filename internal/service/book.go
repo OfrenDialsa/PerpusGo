@@ -91,20 +91,35 @@ func (b *bookService) Delete(ctx context.Context, id string) error {
 }
 
 // Show implements domain.BookService.
-func (b *bookService) Show(ctx context.Context, id string) (dto.BookData, error) {
+func (b *bookService) Show(ctx context.Context, id string) (dto.BookShowData, error) {
 	persisted, err := b.bookRepository.FindById(ctx, id)
 
 	if err != nil {
-		return dto.BookData{}, err
+		return dto.BookShowData{}, err
 	}
 
 	if persisted.Id == "" {
-		return dto.BookData{}, errors.New("book's data not found")
+		return dto.BookShowData{}, domain.ErrBookNotFound
 	}
 
-	return dto.BookData{
-		Id:    persisted.Id,
-		Isbn:  persisted.Isbn,
-		Title: persisted.Title,
+	stocks, err := b.bookStockRepository.FindByBookId(ctx, persisted.Id)
+	if err != nil {
+		return dto.BookShowData{}, err
+	}
+	stocksData := make([]dto.BookStockData, 0)
+	for _, v := range stocks {
+		stocksData = append(stocksData, dto.BookStockData{
+			Code:   v.Code,
+			Status: v.Status,
+		})
+	}
+	return dto.BookShowData{
+		BookData: dto.BookData{
+			Id:          persisted.Id,
+			Isbn:        persisted.Isbn,
+			Title:       persisted.Title,
+			Description: persisted.Description,
+		},
+		Stocks: stocksData,
 	}, nil
 }

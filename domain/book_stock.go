@@ -1,8 +1,14 @@
 package domain
 
 import (
+	"PerpusGo/dto"
 	"context"
 	"database/sql"
+)
+
+const (
+	BookStockStatusAvailable = "AVAILABLE"
+	BookStockStatusBorrowed  = "BORROWED"
 )
 
 type BookStock struct {
@@ -20,4 +26,9 @@ type BookStockRepository interface {
 	Update(ctx context.Context, stock *BookStock) error
 	DeleteByBookId(ctx context.Context, id string) error
 	DeleteByCodes(ctx context.Context, codes []string) error
+}
+
+type BookStockService interface {
+	Create(ctx context.Context, req dto.CreateBookStockRequest) error
+	Delete(ctx context.Context, req dto.DeleteBookStockRequest) error
 }
