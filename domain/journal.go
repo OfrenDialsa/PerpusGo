@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	JournalStatusInProgress  = "IN_PROGRESS"
-	JournalStatusInCompleted = "COMPLETED"
+	JournalStatusInProgress = "IN_PROGRESS"
+	JournalStatusCompleted  = "COMPLETED"
 )
 
 type Journal struct {
@@ -33,7 +33,7 @@ type JournalRepository interface {
 	Update(ctx context.Context, journal *Journal) error
 }
 
-type JurnalServices interface {
+type JournalServices interface {
 	Index(ctx context.Context, se JournalSearch) ([]dto.JournalData, error)
 	Create(ctx context.Context, req dto.CreateJournalRequest) error
 	Return(ctx context.Context, req dto.ReturnJournalRequest) error

@@ -19,21 +19,38 @@ func NewJournal(con *sql.DB) domain.JournalRepository {
 }
 
 // Find implements domain.JournalRepository.
-func (j *JournalRepository) Find(ctx context.Context, se domain.JournalSearch) ([]domain.Journal, error) {
-	panic("unimplemented")
+func (j *JournalRepository) Find(ctx context.Context, se domain.JournalSearch) (result []domain.Journal, err error) {
+	dataset := j.db.From("journals")
+	if se.CustomerId != "" {
+		dataset = dataset.Where(goqu.C("customer_id").Eq(se.CustomerId))
+	}
+	if se.Status != "" {
+		dataset = dataset.Where(goqu.C("status").Eq(se.Status))
+	}
+	err = dataset.ScanStructsContext(ctx, result)
+	return
 }
 
 // FindById implements domain.JournalRepository.
-func (j *JournalRepository) FindById(ctx context.Context, id string) (domain.Journal, error) {
-	panic("unimplemented")
+func (j *JournalRepository) FindById(ctx context.Context, id string) (result domain.Journal, err error) {
+	dataset := j.db.From("journals").Where(goqu.C("id").Eq(id))
+	_, err = dataset.ScanStructContext(ctx, &result)
+	return
 }
 
 // Save implements domain.JournalRepository.
 func (j *JournalRepository) Save(ctx context.Context, journal *domain.Journal) error {
-	panic("unimplemented")
+	executor := j.db.Insert("journals").Rows(journal).Executor()
+	_, err := executor.ExecContext(ctx)
+	return err
 }
 
 // Update implements domain.JournalRepository.
 func (j *JournalRepository) Update(ctx context.Context, journal *domain.Journal) error {
-	panic("unimplemented")
+	executor := j.db.Update("journals").
+		Where(goqu.C("id").Eq(journal.Id)).
+		Set(journal).
+		Executor()
+	_, err := executor.ExecContext(ctx)
+	return err
 }

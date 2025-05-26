@@ -18,6 +18,7 @@ type Customer struct {
 type CustomerRepository interface {
 	FindAll(ctx context.Context) ([]Customer, error)
 	FindByID(ctx context.Context, id string) (Customer, error)
+	FindByIDs(ctx context.Context, ids []string) ([]Customer, error)
 	Save(ctx context.Context, c *Customer) error
 	Update(ctx context.Context, c *Customer) error
 	Delete(ctx context.Context, id string) error
