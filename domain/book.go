@@ -7,13 +7,14 @@ import (
 )
 
 type Book struct {
-	Id          string       `db:"id"`
-	Title       string       `db:"title"`
-	Description string       `db:"description"`
-	Isbn        string       `db:"isbn"`
-	Created_at  sql.NullTime `db:"created_at"`
-	Updated_at  sql.NullTime `db:"updated_at"`
-	Deleted_at  sql.NullTime `db:"deleted_at"`
+	Id          string         `db:"id"`
+	Title       string         `db:"title"`
+	Description string         `db:"description"`
+	CoverId     sql.NullString `db:"cover_id"`
+	Isbn        string         `db:"isbn"`
+	Created_at  sql.NullTime   `db:"created_at"`
+	Updated_at  sql.NullTime   `db:"updated_at"`
+	Deleted_at  sql.NullTime   `db:"deleted_at"`
 }
 
 type BookRepository interface {

@@ -87,6 +87,7 @@ func (j *journalService) Index(ctx context.Context, se domain.JournalSearch) ([]
 			BookStock:  v.StockCode,
 			Book:       book,
 			Customer:   customer,
+			Status:     v.Status,
 			BorrowedAt: v.BorrowedAt.Time,
 			ReturnedAt: v.ReturnedAt.Time,
 		})
