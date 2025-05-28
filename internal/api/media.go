@@ -24,8 +24,10 @@ func NewMedia(app *fiber.App, cnf *config.Config, mediaService domain.MediaServi
 		mediaService: mediaService,
 	}
 
-	app.Post("/media", authMid, ma.Create)
-	app.Static("/media", cnf.Storage.BasePath)
+	media := app.Group("/media", authMid)
+
+	media.Post("", ma.Create)
+	media.Static("", cnf.Storage.BasePath)
 }
 
 func (ma mediaApi) Create(ctx *fiber.Ctx) error {

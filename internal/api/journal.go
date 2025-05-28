@@ -20,9 +20,11 @@ func NewJournal(app *fiber.App, journalService domain.JournalServices, authMid f
 		journalService: journalService,
 	}
 
-	app.Get("/journals", authMid, ja.index)
-	app.Post("/journals", authMid, ja.Create)
-	app.Put("/journals/:id", authMid, ja.Update)
+	journals := app.Group("/journals", authMid)
+
+	journals.Get("", ja.index)
+	journals.Post("", ja.Create)
+	journals.Put(":id", ja.Update)
 }
 
 func (ja journalApi) index(ctx *fiber.Ctx) error {
