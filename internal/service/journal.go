@@ -171,7 +171,7 @@ func (j *journalService) Return(ctx context.Context, req dto.ReturnJournalReques
 		return err
 	}
 
-	hoursLate := time.Now().Sub(journal.DueAt.Time).Hours()
+	hoursLate := time.Since(journal.DueAt.Time).Hours()
 	if hoursLate >= 24 {
 		daysLate := int(hoursLate / 24)
 

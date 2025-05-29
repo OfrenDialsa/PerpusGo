@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -54,6 +55,34 @@ func (a AuthService) Login(ctx context.Context, req dto.AuthRequest) (dto.AuthRe
 	}
 
 	return dto.AuthResponse{
-		Token: tokenStr,
+		UserId: user.Id,
+		Token:  tokenStr,
+	}, nil
+}
+
+func (a AuthService) Register(ctx context.Context, req dto.RegisterRequest) (dto.RegisterResponse, error) {
+
+	existingUser, _ := a.userRepository.FindByEmail(ctx, req.Email)
+	if existingUser.Id != "" {
+		return dto.RegisterResponse{}, errors.New("email already registered")
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return dto.RegisterResponse{}, errors.New("failed to hash password")
+	}
+
+	user := domain.User{
+		Id:       uuid.NewString(),
+		Email:    req.Email,
+		Password: string(hashedPassword),
+	}
+
+	if err := a.userRepository.Save(ctx, user); err != nil {
+		return dto.RegisterResponse{}, errors.New("failed to save user")
+	}
+
+	return dto.RegisterResponse{
+		Message: "User Successfully Registered",
 	}, nil
 }

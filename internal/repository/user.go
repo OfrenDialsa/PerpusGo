@@ -24,3 +24,10 @@ func (u *userRepository) FindByEmail(ctx context.Context, email string) (usr dom
 	_, err = dataset.ScanStructContext(ctx, &usr)
 	return
 }
+
+// Save implements domain.UserRepository.
+func (u *userRepository) Save(ctx context.Context, user domain.User) error {
+	executor := u.db.Insert("users").Rows(user).Executor()
+	_, err := executor.ExecContext(ctx)
+	return err
+}
