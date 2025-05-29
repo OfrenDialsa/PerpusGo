@@ -5,11 +5,13 @@ Perpus Go is a backend project developed in **Golang** using the **Fiber** web f
 ## 🚀 Features
 
 - 🔐 **JWT Authentication**
-  - User login with secure token generation
+  - User login and register with secure token generation
   - Middleware-protected routes
 - 📘 **Book Management**
   - CRUD operations for books (Create, Read, Update, Delete)
   - Book listing and search functionality
+  - Managing Book stocks and Journals
+  - Applies charges for books returned past the due date.
 - 🛠️ Built with:
   - Go (Golang)
   - Fiber (Web framework)
@@ -18,33 +20,58 @@ Perpus Go is a backend project developed in **Golang** using the **Fiber** web f
 ## 🧱 Project Structure
 
 ```
-PerpusGo/
-├── .github/
-├── domain/
+📁 PerpusGo
+├── 📁 .github
+├── 📁 domain
 │   ├── auth.go
+│   ├── book.go
+│   ├── book_stock.go
+│   ├── charge.go
 │   ├── customer.go
+│   ├── journal.go
+│   ├── media.go
 │   └── user.go
-├── dto/
+├── 📁 dto
 │   ├── auth_data.go
+│   ├── book_data.go
+│   ├── book_stock_data.go
 │   ├── customer_data.go
+│   ├── journal_data.go
+│   ├── media_data.go
 │   └── response.go
-├── internal/
-│   ├── api/
+├── 📁 internal
+│   ├── 📁 api
 │   │   ├── auth.go
-│   │   └── customer.go
-│   ├── config/
+│   │   ├── book_stock.go
+│   │   ├── book.go
+│   │   ├── customer.go
+│   │   ├── journal.go
+│   │   └── media.go
+│   ├── 📁 config
 │   │   ├── loader.go
 │   │   └── model.go
-│   ├── connection/
-│   │   └── database.go
-│   ├── repository/
+│   ├── 📁 connection
+│   │   └── connection.go
+│   ├── 📁 repository
+│   │   ├── book_stock.go
+│   │   ├── book.go
+│   │   ├── charge.go
 │   │   ├── customer.go
+│   │   ├── journal.go
+│   │   ├── media.go
 │   │   └── user.go
-│   ├── service/
+│   ├── 📁 service
 │   │   ├── auth.go
-│   │   └── customer.go
-│   └── util/
-│       └── validation.go
+│   │   ├── book_stock.go
+│   │   ├── book.go
+│   │   ├── customer.go
+│   │   ├── journal.go
+│   │   └── media.go
+│   └── 📁 util
+├── 📁 sql
+│   ├── books-book-stocks.sql
+│   └── customer-user.sql
+├── 📁 storage
 ├── .env
 ├── .gitignore
 ├── go.mod
@@ -73,13 +100,21 @@ cd PerpusGo
 2. **Create `.env` file**
 
 ```env
-PORT=3000
-DB_HOST=localhost
+SERVER_HOST=your_host
+SERVER_PORT=9000
+SERVER_ASSET_URL=http://localhost:9000/media
+
+DB_HOST=your_host
 DB_PORT=5432
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_NAME=perpus_go
-JWT_SECRET=your_jwt_secret
+DB_NAME=your_dbname
+DB_USER=your_user
+DB_PASS=your_pass
+DB_TZ=Asia/Jakarta
+
+JWT_KEY=your_secret
+JWT_EXP=your_exp
+
+STORAGE_PATH = yourpath
 ```
 
 3. **Install dependencies**
@@ -94,7 +129,7 @@ go mod tidy
 go run main.go
 ```
 
-The server will start on `http://localhost:3000`.
+The server will start on `http://localhost:9000`.
 
 ## 🧪 API Endpoints
 
@@ -102,7 +137,8 @@ The server will start on `http://localhost:3000`.
 
 | Method | Endpoint       | Description        |
 |--------|----------------|--------------------|
-| POST   | `/auth`        | User login         |
+| POST   | `/login`       | User login         |
+| POST   | `/register`    | User register      |
 
 ### Customers (Protected by JWT)
 
@@ -124,6 +160,28 @@ The server will start on `http://localhost:3000`.
 | PUT    | `/books/:id`   | Update book details    |
 | DELETE | `/books/:id`   | Delete a book          |
 
+### Book-stocks (Protected by JWT)
+
+| Method | Endpoint        | Description            |
+|--------|-----------------|------------------------|
+| POST   | `/book-stocks`  | Add a new book stock   |
+| DELETE | `/book-stocks`  | Delete a book stock    |
+
+### Journals (Protected by JWT)
+
+| Method | Endpoint          | Description            |
+|--------|-------------------|------------------------|
+| GET    | `/journals`       | List all journals      |
+| POST   | `/journals`       | Add a new journals     |
+| PUT    | `/journals/:id`   | Update journals detail |
+
+### Media/Book cover (Protected by JWT)
+
+| Method | Endpoint          | Description            |
+|--------|-------------------|------------------------|
+| POST   | `/media`          | Upload Book cover      |
+| STATIC | `/media`          | Save Book cover        |
+
 ## 🔐 Authentication
 
 All book-related endpoints require a valid JWT token in the `Authorization` header:
@@ -132,18 +190,14 @@ All book-related endpoints require a valid JWT token in the `Authorization` head
 Authorization: Bearer <token>
 ```
 
-## 📘 Example Book Object
+## 📘 Example Auth Object
 
 ```json
 {
-  "code": "M-0001",
-  "name": "10 Dosa Besar Soeharto"
+  "email": "nerodev@gmail.com",
+  "password": "adminn"
 }
 ```
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
 
 ## 🙌 Contributing
 
